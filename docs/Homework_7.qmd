@@ -27,7 +27,7 @@ glimpse(iris1)
 
 ######Q3
 iris2 <- select(iris1, Species, Sepal.Length, Sepal.Width)
-iris2
+head(iris2)
 glimpse(iris2)
 #there are 56 observations and 3 variables when selecting for these paramters
 
@@ -39,21 +39,21 @@ head(iris3, 6)
 
 ######Q5
 iris4 <- mutate(iris3, Sepal.Area=Sepal.Length*Sepal.Width)
-iris4
+head(iris4)
 glimpse(iris4)
 #there are 56 observations and 4 variables when creating a new column this way
 
 
 ######Q6
 iris5<- summarize(iris4, Avg.Sepal.Length=mean(Sepal.Length), Avg.Sepal.Width=mean(Sepal.Width), Sample.Size=n())
-iris5
+head(iris5)
 
 
 ######Q7
 iris6 <- iris4%>%
   group_by(Species)%>%
   summarize(Avg.Sepal.Length=mean(Sepal.Length), Avg.Sepal.Width=mean(Sepal.Width))
-iris6
+head(iris6)
 
 
 ######Q8
