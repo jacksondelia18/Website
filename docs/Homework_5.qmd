@@ -1,0 +1,66 @@
+---
+title: "Homework5"
+format: html
+---
+This is homework 5 about running functions
+
+Jackson D'Elia
+
+
+Homework 5
+
+
+```{r}
+################
+###Create a funtion that takes the parameters 
+# required to run a logistic growth model and 
+# returns a dataframe with columns for population size and time.
+
+Nt <- function(N0 = 10, r = 0.1, K = 200, tf = 100, ts = 1) {
+#define function that finds Nt
+
+  t <- seq(from = 1, to = tf, by = ts)
+  e <- 2.7183
+  N <- K/(1+((K-N0)/N0)*e^(-r*t))
+#set variables needed for equation and run it
+
+  df <- data.frame(t, N)
+  #turns the output into a data frame
+
+return(df)
+}
+
+
+LogGrowth <- Nt()
+#name this data frame output function for later use
+
+################
+```
+
+
+Question 2
+
+
+Make a function which creates a plot
+
+
+```{r}
+################
+plot <- function(df = LogGrowth){
+
+  library(ggplot2) #call up ggplot
+  LogGrowth |>
+      ggplot(aes(x=t, y=N))+
+    geom_point()+
+    labs(
+      x = "Time in Years", 
+      y = "Population Size") +
+    theme_minimal()
+#plug the aformentioned LogGrowth data frame into a graph.
+#name the axes.
+#I like the minimal theme :^)
+
+}
+plot()
+```
+

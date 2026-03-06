@@ -1,0 +1,32 @@
+---
+title: "Jackson D'Elia"
+---
+Homeworks:
+
+- HW3: [Homework 3](Homework_3.html)
+
+
+- HW4: [Homework 4](HW5-2.html)
+
+
+- HW5: [Homework 5](Homework_5.html)
+
+
+- HW6: [Homework 6](Homework_6.html)
+
+
+- HW7: [Homework 7](Homework_7.html)
+
+___
+
+
+*Fun Fact*:
+Jackson is a Beekeeper 🐝
+
+___
+
+
+
+*This is a Quarto website.*
+
+To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
