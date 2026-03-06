@@ -10,6 +10,8 @@ Examine the structure of the iris data set. How many observations and variables 
 ```{r}
 #This #homework assignment focus on data manipulation in R. Complete these problems using the dplyr and tidyverse packages.
 #Examine the structure of the iris data set. How many observations and variables are in the data set?
+library(tidyverse)
+library(dplyr)
 
 data(iris)
 class(iris)
