@@ -1,0 +1,92 @@
+#ggplot HW
+data <- iris
+print(iris)
+
+library(ggplot2) # used # so it doesnt run multiple times
+library(tidyverse)
+
+####################################
+#Q1
+#continuous x and continuous y
+#Use a dataset where both x and y are continuous variables.
+
+##For example, (y) could depend linearly on (x) with some noise.
+
+#Your figure should:
+
+#Display the relationship between the variables
+#Include a fitted regression line
+#Required figure
+
+#Scatter plot of (y) vs (x)
+#Regression line using geom_smooth(method = "lm")
+
+data_set1 <- data.frame(data$Sepal.Length, data$Sepal.Width)
+data_set1
+
+data_set1 |> ggplot(aes(x=data.Sepal.Length, y=data.Sepal.Width)) + 
+  geom_point(size=0.8) +
+  theme_minimal() +
+  labs(
+    x = "Sepal Length",
+    y = "Sepal Width"
+)
+  
+
+
+####################################
+#Q2
+#discrete x and continuous y
+
+data_set2 <- data.frame(data$Species, data$Petal.Length)
+
+data_set2 |> ggplot(aes(x=data.Species, y=data.Petal.Length)) +
+  geom_boxplot(fill = "purple") +
+  theme_minimal()+
+  labs(
+    x = "Species",
+    y = "Petal Length"
+  )
+
+
+####################################
+#Q2
+#continuous x and discrete y
+
+
+data_set3<- iris%>%
+ mutate(binary_setosa=case_when(Species=="setosa"~1, TRUE ~0))%>%
+  select(Species, binary_setosa, everything())
+print(data_set3)
+
+data_set_3_clean <- data.frame(data_set3$binary_setosa, data_set3$Petal.Length)
+print(data_set_3_clean)
+
+data_set_3_clean |>
+ggplot(aes(x=data_set3.Petal.Length, y=data_set3.binary_setosa)) +
+  geom_point(size=0.8) +
+  geom_smooth(method = "glm", method.args = list(family = "binomial"))+
+  theme_minimal() +
+  labs(
+    x = "Petal Length",
+    y = "Is Setosa?")
+
+
+
+####################################
+#Q2
+#discrete x and discrete y
+
+
+bee <- read.csv("/Users/jacksondelia/Documents/GitHub/Website/bee_fix.csv")
+
+
+
+bee |> ggplot(aes(x=bombus_spp)) +
+  geom_bar(fill = "maroon") +
+  theme_minimal()+
+  labs(
+    x = "Bee Species",
+    y = "Host Plants") +
+  scale_y_log10() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1))
