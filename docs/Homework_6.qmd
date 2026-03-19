@@ -1,5 +1,5 @@
 ---
-title: "Homework_6"
+title: "Homework 6"
 format: html
 ---
 

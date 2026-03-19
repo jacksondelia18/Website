@@ -1,10 +1,10 @@
 ---
-title: "Untitled"
+title: "Homework 8"
 format: html
 ---
 
 
-Homework 8
+ggplot homework
 
 
 ```{r}
