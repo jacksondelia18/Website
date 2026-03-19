@@ -10,7 +10,7 @@ Homework 8
 ```{r}
 #ggplot HW
 data <- iris
-print(iris)
+
 
 library(ggplot2) # used # so it doesnt run multiple times
 library(tidyverse)
@@ -32,7 +32,7 @@ library(tidyverse)
 #Regression line using geom_smooth(method = "lm")
 
 data_set1 <- data.frame(data$Sepal.Length, data$Sepal.Width)
-data_set1
+#data_set1
 
 data_set1 |> ggplot(aes(x=data.Sepal.Length, y=data.Sepal.Width)) + 
   geom_point(size=0.8) +
@@ -60,17 +60,17 @@ data_set2 |> ggplot(aes(x=data.Species, y=data.Petal.Length)) +
 
 
 ####################################
-#Q2
+#Q3
 #continuous x and discrete y
 
 
 data_set3<- iris%>%
  mutate(binary_setosa=case_when(Species=="setosa"~1, TRUE ~0))%>%
   select(Species, binary_setosa, everything())
-print(data_set3)
+#print(data_set3)
 
 data_set_3_clean <- data.frame(data_set3$binary_setosa, data_set3$Petal.Length)
-print(data_set_3_clean)
+#print(data_set_3_clean)
 
 data_set_3_clean |>
 ggplot(aes(x=data_set3.Petal.Length, y=data_set3.binary_setosa)) +
@@ -84,7 +84,7 @@ ggplot(aes(x=data_set3.Petal.Length, y=data_set3.binary_setosa)) +
 
 
 ####################################
-#Q2
+#Q4
 #discrete x and discrete y
 
 
