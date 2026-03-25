@@ -1,0 +1,106 @@
+#1) 1) Create a list of any length that contains a mix of numeric, character strings, boolean variables, and at least one other list.
+import numpy as np
+from numpy import random
+
+nums = [9,8,7,6]
+mixed = [1, 2, True, "blue", nums]
+print(mixed)
+
+
+#1) Pull out the third element in the list and store it as a new object.
+indexed = mixed[3]
+print(indexed)
+
+
+
+#2) Index into the primary list extracting the interior list and save the 3rd element in it as listWithinList.
+listWithinlist = mixed[4][2]
+print(listWithinlist)
+
+
+#3) Use at least two list methods (.pop(), .append(), .remove(), etc.) and briefly describe their effects (1 sentence each).
+mixed.pop(2)
+print(mixed) #pops "True" from list and stores it (i think?)
+
+
+mixed.append("add_me")
+print(mixed) #adds new value "add_me" to the end of the list
+
+mixed.remove("blue")
+print(mixed) #removes the value named "blue"
+
+
+
+#2) Create a dictionary that contains at least 5 keys and 5 values.
+Wizard_Dictionary = {
+   "Robes":"Brown", 
+   "Hat": "wide",
+   "Spells Known": 47,
+   "Homonculus Names": ["Rodnick", "Jeremoiah", "Frankle", "Dort", "Zeke [desceased]"],
+   "Grimoire": "being studied",
+   "Mana": "cultivated"
+
+}
+
+
+#1) Extract all of the keys and save as "keys".
+keys = Wizard_Dictionary.keys()
+print(keys)
+
+
+#2) Extract all of the values and save as "values".
+values = Wizard_Dictionary.values()
+print(values)
+
+
+#3) Use two dictionary methods on your dictionary and briefly describe their effects (1 sentence each).
+items = Wizard_Dictionary.items()
+print(items) #items lists key names and values stored within
+
+types = Wizard_Dictionary.get("boolean")
+print(types) #returns values that are bollean, in this case none
+
+#4) Add a new element to the dictionary.
+Wizard_Dictionary["we love"] = "casting spells"
+print(Wizard_Dictionary)
+
+#5) Remove a different element from the dictionary.
+del Wizard_Dictionary["Hat"]
+print(Wizard_Dictionary)
+
+
+
+
+
+
+#3) Create a numpy array of length 100 with values bound between 0 and 1 and save as arr1.
+
+
+
+
+arr1 = random.rand(100)
+print(arr1)
+
+
+#1) Extract the last 10 elements using negative indexing
+arr1[-10:] #'give me the last 10 digits'
+
+
+#2) Convert the numeric (float) data to character strings and then convert back to a float.
+arr1.astype(str) #float to char string
+arr1.astype(float) #char string to float
+
+
+#3) Reshape the length 100 array (arr1) to be a 10x10, 2D array called arr2D.
+arr2d = arr1.reshape(10,10) #reshape folds it into a 2d
+print(arr2d)
+
+#4) Create a binary array that is 10x10 where 1s are generated with a probablilty of .2 and 0s with a probability of .8 and store as arr_bin.
+bin = random.choice([0,1], p = [.8, .2], size= 100) #make the weighted vector
+arr_bin = bin.reshape(10,10) #then fold it into a 10x10 2d
+print(arr_bin)
+
+
+#5) Join these two arrays (arr2D and arr_bin) to be a 10x10x2 3D data cube where the first layer is the float data and the second layer is the binary array.
+np.stack((arr2d, arr_bin))
+#stack these two into a 10x10x2
