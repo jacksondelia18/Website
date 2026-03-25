@@ -118,5 +118,5 @@ arr_bin = bin.reshape(10,10) #then fold it into a 10x10 2d
 np.stack((arr2d, arr_bin))
 #stack these two into a 10x10x2
 
-
+#test fix
 ```
