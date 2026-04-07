@@ -72,4 +72,33 @@ fig.show()
 
 
 #look at some projections
-fig.update_geos(projection_type="natural earth")
+fig.update_geos(projection_type="orthographic")
+
+
+#tile-based choropleths
+from urllib.request import urlopen
+
+with urlopen("https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json") as response:
+    county_geojson = json.load(response)
+
+county_df = pd.read_csv(
+    "https://raw.githubusercontent.com/plotly/datasets/master/fips-unemp-16.csv",
+    dtype={"fips": str}
+)
+
+county_df.head()
+
+fig = px.choropleth_map(
+    county_df,
+    geojson=county_geojson,
+    locations="fips",
+    featureidkey="id",
+    color="unemp",
+    color_continuous_scale="Plasma",
+    zoom=3,
+    center={"lat": 37.8, "lon": -96},
+    map_style="carto-darkmatter",
+    opacity=0.7,
+    title="US county unemployment"
+)
+fig.show() 
