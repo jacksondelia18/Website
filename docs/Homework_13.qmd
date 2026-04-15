@@ -1,0 +1,111 @@
+---
+title: "Homework 13"
+format: html
+---
+
+Code for Homework 13, GLMs
+
+```{r}
+######HW 13
+###Jackson D'Elia
+###April 15
+
+getwd()
+###
+
+
+#load libraries, load data. Using bee disease data wide.
+
+library(tidyverse)
+library(lubridate)
+library(lme4)
+library(car)
+
+bee_dat <- read_csv("Burnham_field_data_pathogens_wide.csv")
+
+bee_dat <- bee_dat %>%
+  mutate(
+    sampling_date = mdy(sampling_date),
+    site_code = factor(site_code),
+    field_id = factor(field_id),
+    bee_caste = factor(bee_caste),
+    bombus_spp = factor(bombus_spp),
+    host_plant = factor(host_plant),
+    sampling_event = factor(sampling_event),
+    sampling_event_num = as.numeric(as.character(sampling_event)),
+    log10_BQCV_load = log10(BQCV_pathogen_load + 1),
+    log10_DWV_load = log10(DWV_pathogen_load + 1),
+    log10_Nosema_load = log10(Nosema_pathogen_load + 1)
+  )
+
+glimpse(bee_dat)
+
+df_filtered <- bee_dat[bee_dat$log10_Nosema_load > 0 & bee_dat$log10_BQCV_load > 0, ]
+
+########
+#MODEL 1
+########
+g_Nosema_by_field <- glm(
+  log10_Nosema_load ~ field_id,
+  data = df_filtered)
+
+by_field <- Anova(g_Nosema_by_field)
+print(by_field)
+#Nosema load by field where sample was collected.
+#this asks if location is a factor in nosema infection load.
+#hypothesis: Nosema can be transmitted via flower visitation. Nosema load will differ across sites as some places will be disease 'hotspots'
+
+
+#Graph of Nosema load by field site
+qplot(
+  x = field_id,
+  y = log10_Nosema_load,
+  data = df_filtered) +
+geom_boxplot(method = "lm", se = TRUE)
+
+
+
+```
+
+The result is statistically signifigant with a p value of 0.031, suggesting that Nosema load is influenced by field id, meaning some sites result in specemins with higher loads than other sites.
+there is a high amount of variation and bees are mobile between sites, so this conclusion might be presumptuous.
+
+```{r}
+########
+#MODEL 2
+########
+g_bqcv_site <- lmer(
+  log10_Nosema_load ~ bombus_spp + (1 | sampling_event),
+  data = df_filtered)
+
+Anova(g_bqcv_site)
+```
+
+A model of nosema load by bee species, taking into account random effects of sampling event.
+This asks if different species are more susceptible to nosema infection
+
+
+This model does not yeild a statistically signifigant result, suggesting that Nosema load is not influenced by bee species. 
+# Nosema seems to infect bombus species equally
+
+```{r}
+
+#####################
+#graphing model 2
+#####################
+df_filtered <- bee_dat[bee_dat$log10_Nosema_load > 0 & bee_dat$log10_BQCV_load > 0, ]
+
+
+g2 <- ggplot(data=df_filtered) +
+          aes(x=log10_Nosema_load) +
+          geom_bar(fill="tomato",color="black")+ 
+          theme(legend.position="none")
+  theme(legend.position = "top")
+  theme(legend.position = c(.2, .8))
+print(g2)            
+```
+
+Model of nosema load, a non-gaussian distribution. 
+# bees tend to have lower Nosema load, since the pathogen is harmful to the insect
+Therefore we see a large amount of lower loads due to a survivorship bias
+
