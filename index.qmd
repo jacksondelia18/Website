@@ -18,6 +18,9 @@ Homeworks:
 - HW7: [Homework 7](Homework_7.html)
 
 
+- HW8: [Homework 8](NOT DONE YET)
+
+
 - HW9: [Homework 9](Homework_8.html)
 
 
