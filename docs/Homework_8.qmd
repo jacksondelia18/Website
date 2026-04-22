@@ -7,6 +7,7 @@ format: html
 ggplot homework
 
 
+Question 1:
 ```{r}
 #ggplot HW
 data <- iris
@@ -42,7 +43,10 @@ data_set1 |> ggplot(aes(x=data.Sepal.Length, y=data.Sepal.Width)) +
     y = "Sepal Width"
 )
   
+```
 
+Question 2:
+```{r}
 
 ####################################
 #Q2
